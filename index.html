@@ -1,58 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karim Ali — AI | DevOps | Cybersecurity</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karim Ali — AI | DevOps | Cybersecurity</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/4712/4712107.png">
+
+  <style>
+    :root {
+      --bg: #0f1115;
+      --text: #eaeaea;
+      --accent: #4cc9f0;
+      --secondary: #9b9b9b;
+      --card-bg: #181a1f;
+    }
+
+    /* Light mode variables */
+    [data-theme="light"] {
+      --bg: #f9fafc;
+      --text: #121212;
+      --accent: #007aff;
+      --secondary: #555;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      text-align: center;
+      padding: 5rem 1rem 2rem;
+      position: relative;
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .hero img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      object-fit: cover;
+      margin-bottom: 0.8rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+
+    header p {
+      margin-top: 0.5rem;
+      font-weight: 500;
+      color: var(--secondary);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 3rem 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+      padding-bottom: 0.2rem;
+    }
+
+    #about p {
+      font-size: 1.1rem;
+      color: var(--secondary);
+    }
+
+    #skills ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    #skills li {
+      background: var(--card-bg);
+      padding: 0.8rem;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 600;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    #skills li:hover {
+      transform: translateY(-4px);
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: var(--secondary);
+      border-top: 1px solid #1d2027;
+      margin-top: 2rem;
+    }
+
+    /* Fade animation */
+    section, header, footer {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      nav ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <h1>Karim Ali</h1>
-        <p>AI Engineer / DevOps / Cybersecurity / UI-UX</p>
-        <nav>
-            <ul>
-                <li><a href="https://www.linkedin.com/in/karim-ali02/">LinkedIn</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme">☀️</button>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>I’m a Computer Science graduate specializing in Cybersecurity, with hands-on experience in DevOps and Data Analysis. Passionate about machine learning and cloud infrastructure, I thrive on optimizing systems and driving innovation. My goal is to build secure, efficient, and scalable solutions—while continuously growing in the ever-evolving world of cybersecurity</p>
-    </section>
+    <div class="hero">
+      <h1>Karim Ali</h1>
+      <p>AI Engineer · DevOps · Cybersecurity · UI/UX</p>
+    </div>
 
-    <section id="skills">
-        <h2>Skills</h2>
-        <ul>
-            <li>Docker</li>
-            <li>AWS</li>
-            <li>GCP</li>
-            <li>Python</li>
-            <li>Linux</li>
-            <li>Git</li>
-            <li>Bash</li>
-        </ul>
-    </section>
+    <nav>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/karim-ali02/" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/karimali16" target="_blank">GitHub</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <section id="projects">
-        <h2>Projects</h2>
-        <p>See my projects on <a href="https://github.com/karimali16/Projects">GitHub</a>.</p>
-    </section>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I’m a Computer Science graduate specializing in Cybersecurity, with hands-on experience in DevOps and Data Analysis. Passionate about machine learning and cloud infrastructure, I thrive on optimizing systems and driving innovation. My goal is to build secure, efficient, and scalable solutions—while continuously growing in the ever-evolving world of cybersecurity.
+    </p>
+  </section>
 
-    <section id="resume">
-        <h2>Resume</h2>
-        <p>You can view and download my resume from my GitHub repository:</p>
-        <p><a href="https://github.com/karimali16/Projects/blob/main/Resume.pdf" target="_blank">View Resume</a></p>
-    </section>
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li>Docker</li>
+      <li>AWS</li>
+      <li>GCP</li>
+      <li>Python</li>
+      <li>Linux</li>
+      <li>Git</li>
+      <li>Bash</li>
+    </ul>
+  </section>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:karim.ali021999@gmail.com">karim.ali021999@gmail.com</a></p>
-    </section>
+  <section id="projects">
+    <h2>Projects</h2>
+    <p>Explore my work on <a href="https://github.com/karimali16/Projects" target="_blank">GitHub</a>.</p>
+  </section>
 
-    <footer>
-        <p>© 2025 Karim Ali · All rights reserved</p>
-    </footer>
+  <section id="resume">
+    <h2>Resume</h2>
+    <p>
+      You can view or download my latest resume here:
+      <a href="https://github.com/karimali16/Projects/blob/main/Resume.pdf" target="_blank">View Resume</a>
+    </p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:karim.ali021999@gmail.com">karim.ali021999@gmail.com</a></p>
+  </section>
+
+  <footer>
+    <p>© 2025 Karim Ali · All rights reserved</p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
+
+    themeToggle.addEventListener('click', () => {
+      const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
+    });
+  </script>
 </body>
 </html>
